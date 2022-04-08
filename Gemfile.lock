@@ -1,0 +1,34 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    amq-protocol (2.3.2)
+    bunny (2.19.0)
+      amq-protocol (~> 2.3, >= 2.3.1)
+      sorted_set (~> 1, >= 1.0.2)
+    concurrent-ruby (1.1.10)
+    rake (12.3.3)
+    rbtree (0.4.5)
+    serverengine (2.1.1)
+      sigdump (~> 0.2.2)
+    set (1.0.2)
+    sigdump (0.2.4)
+    sneakers (2.12.0)
+      bunny (~> 2.14)
+      concurrent-ruby (~> 1.0)
+      rake (~> 12.3)
+      serverengine (~> 2.1.0)
+      thor
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
+    thor (1.2.1)
+
+PLATFORMS
+  aarch64-linux-musl
+
+DEPENDENCIES
+  bunny
+  sneakers
+
+BUNDLED WITH
+   2.3.7
