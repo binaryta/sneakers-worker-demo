@@ -1,7 +1,6 @@
 require 'sneakers/runner'
 load "config.rb"
 
-
 class DemoWorker
   include Sneakers::Worker
   from_queue :demo
