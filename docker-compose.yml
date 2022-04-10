@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   rabbitmq:
-    image: "rabbitmq:3.9-management"
+    image: "rabbitmq:3.9.13-management-alpine"
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -9,6 +9,7 @@ services:
     build: .
     volumes:
       - .:/app
+      - ./bundle:/usr/local/bundle
     depends_on:
       - rabbitmq
     links:
