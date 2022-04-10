@@ -1,19 +1,29 @@
 version: "3.8"
+
+x-worker: &worker
+  build: .
+  stdin_open: true
+  tty: true
+  volumes:
+    - .:/app
+    - ./bundle:/usr/local/bundle
+  depends_on:
+    rabbitmq:
+      condition: service_healthy
+  environment:
+    - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+
 services:
   rabbitmq:
     image: "rabbitmq:3.9.13-management-alpine"
     ports:
       - "5672:5672"
       - "15672:15672"
-  worker:
-    build: .
-    volumes:
-      - .:/app
-      - ./bundle:/usr/local/bundle
-    depends_on:
-      - rabbitmq
-    links:
-      - rabbitmq
-    environment:
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
-    command: ["bundle", "exec", "ruby", "./setup.rb"]
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 3s
+      retries: 10
+
+  demo_worker:
+    <<: *worker
+    command: ["bundle", "exec", "ruby", "./workers/demo_worker.rb"]
