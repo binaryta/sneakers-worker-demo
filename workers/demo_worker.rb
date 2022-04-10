@@ -1,4 +1,6 @@
-require 'sneakers'
+require 'sneakers/runner'
+load "config.rb"
+
 
 class DemoWorker
   include Sneakers::Worker
@@ -9,3 +11,6 @@ class DemoWorker
   end 
 end
 
+
+r = Sneakers::Runner.new([DemoWorker])
+r.run
