@@ -16,11 +16,14 @@ x-worker: &worker
 services:
   rabbitmq:
     image: "rabbitmq:3.9.13-management-alpine"
+    hostname: rabbit1
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq
+      # environment:
+      #   - RABBITMQ_NODENAME=rabbit@rabbit1
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 3s
@@ -28,8 +31,8 @@ services:
 
   demo_worker:
     <<: *worker
-    command: ["bundle", "exec", "ruby", "./workers/demo_worker.rb"]
+    command: bundle exec ruby ./run.rb DemoWorker
 
   logging_worker:
     <<: *worker
-    command: ["bundle", "exec", "ruby", "./workers/logging_worker.rb"]
+    command: bundle exec ruby ./run.rb LoggingWorker
