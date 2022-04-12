@@ -1,4 +1,3 @@
-require 'sneakers/runner'
 load "config.rb"
 
 class LoggingWorker
@@ -6,6 +5,7 @@ class LoggingWorker
 
   from_queue nil,
     exchange: 'log',
+    exchange_type: 'fanout',
     workers: 10,
     threads: 10,
     durable: true
@@ -15,6 +15,3 @@ class LoggingWorker
     ack!
   end
 end
-
-r = Sneakers::Runner.new([LoggingWorker])
-r.run

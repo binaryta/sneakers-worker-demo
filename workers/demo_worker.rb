@@ -1,4 +1,3 @@
-require 'sneakers/runner'
 load "config.rb"
 
 class DemoWorker
@@ -9,7 +8,3 @@ class DemoWorker
     puts "[x] received: " + msg 
   end 
 end
-
-
-r = Sneakers::Runner.new([DemoWorker])
-r.run
