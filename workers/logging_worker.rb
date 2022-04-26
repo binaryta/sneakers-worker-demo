@@ -8,10 +8,12 @@ class LoggingWorker
     exchange_type: 'fanout',
     workers: 10,
     threads: 10,
-    durable: true
+    queue_options: {
+      durable: false
+    }
 
   def work(msg)
-    ptus msg
+    puts msg
     ack!
   end
 end
