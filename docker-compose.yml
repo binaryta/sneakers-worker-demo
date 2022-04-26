@@ -29,10 +29,14 @@ services:
       interval: 3s
       retries: 10
 
-  demo_worker:
+  workers:
     <<: *worker
-    command: bundle exec ruby ./run.rb DemoWorker
+    command: bundle exec ruby ./run.rb
 
-  logging_worker:
-    <<: *worker
-    command: bundle exec ruby ./run.rb LoggingWorker
+  # demo_worker:
+  #   <<: *worker
+  #   command: bundle exec ruby ./run.rb DemoWorker
+
+  # logging_worker:
+  #   <<: *worker
+  #   command: bundle exec ruby ./run.rb LoggingWorker
