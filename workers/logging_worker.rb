@@ -6,7 +6,6 @@ class LoggingWorker
   from_queue nil,
     exchange: 'log',
     exchange_type: 'fanout',
-    workers: 10,
     threads: 10,
     queue_options: {
       durable: false
